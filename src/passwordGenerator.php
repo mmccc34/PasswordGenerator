@@ -1,5 +1,7 @@
 <?php
 
+namespace Chris\passwordGenerator;
+
 class PasswordGenerator
 {
     // Déclaration des propriétés statiques pour les différents types de caractères
@@ -19,7 +21,7 @@ class PasswordGenerator
     {
         // Vérification que la longueur minimale du mot de passe est de 4 pour garantir diversité
         if ($length < 4) {
-            throw new InvalidArgumentException("La longueur du mot de passe doit être d'au moins 4 caractères.");
+            throw new \InvalidArgumentException("La longueur du mot de passe doit être d'au moins 4 caractères.");
         }
 
         // Concatène tous les ensembles de caractères en une seule chaîne pour les tirages aléatoires
@@ -83,7 +85,7 @@ try {
     // Vérifie si le mot de passe généré est "fort"
     $isStrong = PasswordGenerator::isStrongPassword($password);
     echo "Le mot de passe est fort ? " . ($isStrong ? "Oui" : "Non") . "\n";
-} catch (Exception $e) {
+} catch (\Exception $e) {
     // Gestion des erreurs (si la longueur du mot de passe demandée est inférieure à 4)
     echo "Erreur : " . $e->getMessage();
 }
