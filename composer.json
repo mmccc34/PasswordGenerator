@@ -1,0 +1,19 @@
+{
+    "name": "chris/password-generator",
+    "description": "générateur de mot de passe",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Chris\\PasswordGenerator\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "mmccc34",
+            "email": "mmccc34@icloud.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}
