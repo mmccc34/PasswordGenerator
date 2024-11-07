@@ -1,10 +1,9 @@
 <?php
 
-namespace Chris\passwordGenerator;
 
 require_once __DIR__ . '/vendor/autoload.php';
 
-use Chris\PasswordGenerator\passwordGenerator;
+use Chris\PasswordGenerator\PasswordGenerator;
 
 ?>
 
@@ -23,12 +22,28 @@ use Chris\PasswordGenerator\passwordGenerator;
     <form action="" method="post">
         <label>
             Longueur du mot de passe :
-            <input type="number" name="length" min="4" max="32" value="12" required>
+            <input type="number" name="length" value="12" required>
         </label>
         <button type="submit" name="generate">Générer le mot de passe</button>
     </form>
 
-    
+    <?php
+
+    if (isset($_POST['length'])) {
+
+        $length = (int) $_POST['length'];
+        echo 'La longueur du mot de passe est : ' . htmlspecialchars($length) . '<br>';
+
+        try {
+            $password = PasswordGenerator::generatePassword($length);
+            echo 'Le mot de passe généré est : ' . htmlspecialchars($password) . '<br>';
+        } catch (\Exception $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    ?>
+
     <form action="" method="post">
         <label>
             Vérifier le mot de passe :
@@ -41,39 +56,18 @@ use Chris\PasswordGenerator\passwordGenerator;
 </body>
 
 </html>
+
+
 <?php
 
-require_once __DIR__ . '/vendor/autoload.php';
-
-if (isset($_POST['generate'])) {
-    
-    $length = $_POST['length'];
-    echo 'La longueur du mot de passe est : ' . htmlspecialchars($length) . '<br>';
-
-    $password = passwordGenerator::generatePassword($length);
-
-   
-
-
-    echo 'Le mot de passe généré est : ' . htmlspecialchars($password) . '<br>';
-}
-
-
-
-if (isset($_POST['check_password'])) {
+if (isset($_POST['password'])) {
     $generatePassword = $_POST['password'];
 
-    
-    $isStrong = passwordGenerator::isStrongPassword($generatePassword);
-
-
-    echo "Le mot de passe est-il fort ? " . ($isStrong ? "Oui" : "Non") . '<br>';
-
-    // if ($isStrong) {
-    //     echo 'Le mot de passe est fort.<br>';
-    // } else {
-    //     echo 'Le mot de passe n\'est pas assez fort.<br>';
-    // }
+    try {
+        $isStrong = PasswordGenerator::isStrongPassword($generatePassword);
+        echo "Le mot de passe est-il fort ? " . ($isStrong ? "Oui" : "Non") . '<br>';
+    } catch (\Exception $e) {
+        echo $e->getMessage();
+    }
 }
 ?>
-
