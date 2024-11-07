@@ -76,17 +76,17 @@ class PasswordGenerator
     }
 }
 
-// Exemple d'utilisation
-try {
-    // Génère un mot de passe de 12 caractères
-    $password = PasswordGenerator::generatePassword(12);
-    echo "Mot de passe généré : $password\n";
+// // Exemple d'utilisation
+// try {
+//     // Génère un mot de passe de 12 caractères
+//     $password = PasswordGenerator::generatePassword(12);
+//     echo "Mot de passe généré : $password\n";
 
-    // Vérifie si le mot de passe généré est "fort"
-    $isStrong = PasswordGenerator::isStrongPassword($password);
-    echo "Le mot de passe est fort ? " . ($isStrong ? "Oui" : "Non") . "\n";
-} catch (\Exception $e) {
-    // Gestion des erreurs (si la longueur du mot de passe demandée est inférieure à 4)
-    echo "Erreur : " . $e->getMessage();
-}
+//     // Vérifie si le mot de passe généré est "fort"
+//     $isStrong = PasswordGenerator::isStrongPassword($password);
+//     echo "Le mot de passe est fort ? " . ($isStrong ? "Oui" : "Non") . "\n";
+// } catch (\Exception $e) {
+//     // Gestion des erreurs (si la longueur du mot de passe demandée est inférieure à 4)
+//     echo "Erreur : " . $e->getMessage();
+// }
 
