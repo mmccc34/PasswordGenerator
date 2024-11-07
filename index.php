@@ -18,14 +18,16 @@ use Chris\PasswordGenerator\PasswordGenerator;
 
 <body>
 
+    <div>
+        <form class="form1" action="./index.php" method="post">
+            <label>
+                Longueur du mot de passe :
+                <input type="number" name="length" value="12" required>
+            </label>
+            <button type="submit" name="generate">Générer le mot de passe</button>
+        </form>
+    </div>
 
-    <form action="./index.php" method="post">
-        <label>
-            Longueur du mot de passe :
-            <input type="number" name="length" value="12" required>
-        </label>
-        <button type="submit" name="generate">Générer le mot de passe</button>
-    </form>
 
     <?php
 
@@ -43,15 +45,15 @@ use Chris\PasswordGenerator\PasswordGenerator;
     }
 
     ?>
-
-    <form action="./index.php" method="post">
-        <label>
-            Vérifier le mot de passe :
-            <input type="text" name="password" placeholder="Collez ici votre mot de passe">
-        </label>
-        <button type="submit" name="check_password">Vérifier le mot de passe</button>
-    </form>
-
+    <div>
+        <form action="./index.php" method="post">
+            <label>
+                Vérifier le mot de passe :
+                <input type="text" name="password" placeholder="Collez ici votre mot de passe">
+            </label>
+            <button type="submit" name="check_password">Vérifier le mot de passe</button>
+        </form>
+    </div>
 
 </body>
 
