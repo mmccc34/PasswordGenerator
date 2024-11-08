@@ -42,10 +42,14 @@ class PasswordGenerator
             $allCharacters .= self::$special;
         }
 
+       
+
         // Gestion de l'erreur : aucun caractère coché
-        if (empty($allCharacters)) {
+        if ($allCharacters === '') {
+            
             throw new \InvalidArgumentException("Au moins un type de caractère doit être sélectionné.");
         }
+
 
         // Complète le mot de passe avec des caractères aléatoires jusqu'à atteindre la longueur souhaitée
         for ($i = 0; $i < $length; $i++) {

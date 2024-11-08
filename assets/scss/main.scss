@@ -16,10 +16,15 @@ h1 {
 
 .form1, .form2 {
 
-    border: 1px solid black;      /* Exemple pour visualiser les éléments */
-    padding: 20px;                /* Ajoute de l'espace interne pour chaque élément */
-    width: 30%;                   /* Les deux éléments occupent 45% chacun, laissant 10% de vide */
-    box-sizing: border-box;       /* Assure que les bordures et padding sont inclus dans la largeur */
+    border: 1px solid black;      
+    padding: 20px;                
+    width: 30%;                   
+    box-sizing: border-box;       
     background-color: beige;
 }
 
+
+.result {
+display: flex;
+justify-content: center;
+}
