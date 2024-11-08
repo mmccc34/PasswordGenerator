@@ -17,27 +17,35 @@ class PasswordGenerator
      * @return string Le mot de passe généré.
      * @throws InvalidArgumentException Si la longueur est inférieure à 4.
      */
-    public static final function generatePassword(int $length = 12): string
+    public static final function generatePassword(int $length = 12, array $selectedCharacters = []): string
     {
         // Vérification que la longueur minimale du mot de passe est de 4 pour garantir diversité
         if ($length < 4) {
             throw new \InvalidArgumentException("La longueur du mot de passe doit être d'au moins 4 caractères.");
         }
 
-        // Concatène tous les ensembles de caractères en une seule chaîne pour les tirages aléatoires
-        $allCharacters = self::$upper . self::$lower . self::$numbers . self::$special;
 
-        // Initialisation du mot de passe avec un caractère de chaque type pour assurer diversité
-        $password = [
-            // Prend un caractère aléatoire parmi les lettres majuscules
-            self::$upper[random_int(0, strlen(self::$upper) - 1)],
-            // Prend un caractère aléatoire parmi les lettres minuscules
-            self::$lower[random_int(0, strlen(self::$lower) - 1)],
-            // Prend un caractère aléatoire parmi les chiffres
-            self::$numbers[random_int(0, strlen(self::$numbers) - 1)],
-            // Prend un caractère aléatoire parmi les caractères spéciaux
-            self::$special[random_int(0, strlen(self::$special) - 1)]
-        ];
+        //En fonction des cases cochées
+
+        $allCharacters = '';
+
+        
+        if (in_array('upper', $selectedCharacters)) {
+            $allCharacters .= self::$upper;
+        }
+        if (in_array('lower', $selectedCharacters)) {
+            $allCharacters .= self::$lower;
+        }
+        if (in_array('numbers', $selectedCharacters)) {
+            $allCharacters .= self::$numbers;
+        }
+        if (in_array('special', $selectedCharacters)) {
+            $allCharacters .= self::$special;
+        }
+
+        if (empty($allCharacters)) {
+            throw new \InvalidArgumentException("Au moins un type de caractère doit être sélectionné.");
+        }
 
         // Complète le mot de passe avec des caractères aléatoires jusqu'à atteindre la longueur souhaitée
         for ($i = 4; $i < $length; $i++) {
