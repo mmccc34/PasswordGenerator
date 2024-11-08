@@ -1,54 +1,54 @@
 <?php
-
-
 require_once __DIR__ . '/vendor/autoload.php';
 
 use Chris\PasswordGenerator\PasswordGenerator;
-
 ?>
 
+
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./assets/css/main.css?v=1.0">
     <title>Document</title>
 </head>
 
 <body>
-    <h1>Générateur de mot de passe</h1>
-    <div class="block">
-        <div class="form1">
-            <form action="./index.php" method="post">
-                <label>
-                    Longueur du mot de passe :
-                    <input type="number" name="length" value="12" required>
-                </label>
-                <button type="submit" name="generate">Générer le mot de passe</button>
-            </form>
-        </div>
-    
-
+    <form method="POST" action="./index2.php?v=1.0">
+        <label for="length">Longueur du mot de passe :</label>
+        <input type="number" id="length" name="length" value="12" min="4" required>
+        <label>Types de caractères :</label><br>
+        <input type="checkbox" name="characters[]" value="upper" checked>
+        Majuscules<br>
+        <input type="checkbox" name="characters[]" value="lower" checked>
+        Minuscules<br>
+        <input type="checkbox" name="characters[]" value="numbers" checked>
+        Chiffres<br>
+        <input type="checkbox" name="characters[]" value="special" checked>
+        Caractères spéciaux<br>
+        <button type="submit" name="generate">Générer</button>
+    </form>
+            
     <?php
 
-    if (isset($_POST['length'])) {
+    if (isset($_POST['length']) && isset($_POST['characters'])) {
 
         $length = (int) $_POST['length'];
-        echo 'La longueur du mot de passe est : ' . htmlspecialchars($length) . '<br>';
-
+        $selectedCharacters = $_POST['characters'];
         try {
-            $password = PasswordGenerator::generatePassword($length);
+            
+            $password = PasswordGenerator::generatePassword($length, $selectedCharacters);
             echo 'Le mot de passe généré est : ' . htmlspecialchars($password) . '<br>';
         } catch (\Exception $e) {
             echo $e->getMessage();
         }
     }
-
+    dd($_POST['characters']). '<br>';
+    
     ?>
     <div class=form2>
-        <form action="./index.php" method="post">
+        <form action="./index2.php" method="post">
             <label>
                 Vérifier le mot de passe :
                 <input type="text" name="password" placeholder="Collez ici votre mot de passe">
@@ -57,21 +57,21 @@ use Chris\PasswordGenerator\PasswordGenerator;
         </form>
     </div>
     </div>
+
+
+    <?php
+
+    if (isset($_POST['password'])) {
+        $generatePassword = $_POST['password'];
+
+        try {
+            $isStrong = PasswordGenerator::isStrongPassword($generatePassword);
+            echo "Le mot de passe est-il fort ? " . ($isStrong ? "Oui" : "Non") . '<br>';
+        } catch (\Exception $e) {
+            echo $e->getMessage();
+        }
+    }
+    ?>
 </body>
 
 </html>
-
-
-<?php
-
-if (isset($_POST['password'])) {
-    $generatePassword = $_POST['password'];
-
-    try {
-        $isStrong = PasswordGenerator::isStrongPassword($generatePassword);
-        echo "Le mot de passe est-il fort ? " . ($isStrong ? "Oui" : "Non") . '<br>';
-    } catch (\Exception $e) {
-        echo $e->getMessage();
-    }
-}
-?>
