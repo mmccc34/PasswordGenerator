@@ -13,22 +13,23 @@ use Chris\PasswordGenerator\PasswordGenerator;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./assets/css/main.css">
+    <link rel="stylesheet" href="./assets/css/main.css?v=1.0">
     <title>Document</title>
 </head>
 
 <body>
-
-    <div>
-        <form class="form1" action="./index.php" method="post">
-            <label>
-                Longueur du mot de passe :
-                <input type="number" name="length" value="12" required>
-            </label>
-            <button type="submit" name="generate">Générer le mot de passe</button>
-        </form>
-    </div>
-
+    <h1>Générateur de mot de passe</h1>
+    <div class="block">
+        <div class="form1">
+            <form action="./index.php" method="post">
+                <label>
+                    Longueur du mot de passe :
+                    <input type="number" name="length" value="12" required>
+                </label>
+                <button type="submit" name="generate">Générer le mot de passe</button>
+            </form>
+        </div>
+    
 
     <?php
 
@@ -46,7 +47,7 @@ use Chris\PasswordGenerator\PasswordGenerator;
     }
 
     ?>
-    <div>
+    <div class=form2>
         <form action="./index.php" method="post">
             <label>
                 Vérifier le mot de passe :
@@ -55,7 +56,7 @@ use Chris\PasswordGenerator\PasswordGenerator;
             <button type="submit" name="check_password">Vérifier le mot de passe</button>
         </form>
     </div>
-
+    </div>
 </body>
 
 </html>

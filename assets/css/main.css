@@ -1,0 +1,24 @@
+@charset "UTF-8";
+h1 {
+  color: rgb(0, 0, 0);
+  text-align: center;
+}
+
+.block {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  padding: 10px;
+  gap: 20px;
+}
+
+.form1, .form2 {
+  border: 1px solid black; /* Exemple pour visualiser les éléments */
+  padding: 20px; /* Ajoute de l'espace interne pour chaque élément */
+  width: 30%; /* Les deux éléments occupent 45% chacun, laissant 10% de vide */
+  box-sizing: border-box; /* Assure que les bordures et padding sont inclus dans la largeur */
+  background-color: beige;
+}
+
+/*# sourceMappingURL=main.css.map */
