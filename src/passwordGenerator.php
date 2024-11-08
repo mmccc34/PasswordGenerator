@@ -2,6 +2,8 @@
 
 namespace Chris\passwordGenerator;
 
+
+
 class PasswordGenerator
 {
     // Déclaration des propriétés statiques pour les différents types de caractères
@@ -45,7 +47,7 @@ class PasswordGenerator
        
 
         // Gestion de l'erreur : aucun caractère coché
-        if ($allCharacters === '') {
+        if (empty($allCharacters)) {
             
             throw new \InvalidArgumentException("Au moins un type de caractère doit être sélectionné.");
         }

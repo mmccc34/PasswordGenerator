@@ -21,9 +21,9 @@ use Chris\PasswordGenerator\PasswordGenerator;
     <div class='block'>
         <div class='form1'>
             <form method="POST" action="./index.php">
-                <label for="length">Longueur du mot de passe :</label>
-                <input type="number" id="length" name="length" value="12" required>
-                <label>Types de caractères :</label><br>
+                <label for="length">Choisissez la longueur du mot de passe :</label>
+                <input type="number" id="length" name="length" value="12" required><br>
+                <label>Cochez les types de caractères :</label><br>
                 <input type="checkbox" name="characters[]" value="upper" checked>
                 Majuscules<br>
                 <input type="checkbox" name="characters[]" value="lower" checked>
@@ -39,7 +39,7 @@ use Chris\PasswordGenerator\PasswordGenerator;
 
 
 
-        <div class=form2>
+        <div class='form2'>
             <form action="./index.php" method="post">
                 <label>
                     Vérifier le mot de passe :
@@ -50,6 +50,7 @@ use Chris\PasswordGenerator\PasswordGenerator;
         </div>
     </div>
 
+   <div class='resultBlock'>
     <div class='result'>
         <?php
         try {
@@ -68,6 +69,7 @@ use Chris\PasswordGenerator\PasswordGenerator;
         }
 
         ?>
+    </div>
     </div>
 
     <?php
