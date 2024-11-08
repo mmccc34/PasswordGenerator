@@ -15,7 +15,7 @@ use Chris\PasswordGenerator\PasswordGenerator;
 </head>
 
 <body>
-    <form method="POST" action="./index2.php?v=1.0">
+    <form method="POST" action="./index.php">
         <label for="length">Longueur du mot de passe :</label>
         <input type="number" id="length" name="length" value="12" min="4" required>
         <label>Types de caractères :</label><br>
@@ -44,7 +44,7 @@ use Chris\PasswordGenerator\PasswordGenerator;
             echo $e->getMessage();
         }
     }
-    dd($_POST['characters']). '<br>';
+    
     
     ?>
     <div class=form2>
