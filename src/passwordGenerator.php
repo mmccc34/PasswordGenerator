@@ -2,6 +2,8 @@
 
 namespace Chris\passwordGenerator;
 
+
+
 class PasswordGenerator
 {
     // Déclaration des propriétés statiques pour les différents types de caractères
@@ -17,30 +19,42 @@ class PasswordGenerator
      * @return string Le mot de passe généré.
      * @throws InvalidArgumentException Si la longueur est inférieure à 4.
      */
-    public static final function generatePassword(int $length = 12): string
+    public static final function generatePassword(int $length = 12, array $selectedCharacters = []): string
     {
         // Vérification que la longueur minimale du mot de passe est de 4 pour garantir diversité
         if ($length < 4) {
             throw new \InvalidArgumentException("La longueur du mot de passe doit être d'au moins 4 caractères.");
         }
 
-        // Concatène tous les ensembles de caractères en une seule chaîne pour les tirages aléatoires
-        $allCharacters = self::$upper . self::$lower . self::$numbers . self::$special;
 
-        // Initialisation du mot de passe avec un caractère de chaque type pour assurer diversité
-        $password = [
-            // Prend un caractère aléatoire parmi les lettres majuscules
-            self::$upper[random_int(0, strlen(self::$upper) - 1)],
-            // Prend un caractère aléatoire parmi les lettres minuscules
-            self::$lower[random_int(0, strlen(self::$lower) - 1)],
-            // Prend un caractère aléatoire parmi les chiffres
-            self::$numbers[random_int(0, strlen(self::$numbers) - 1)],
-            // Prend un caractère aléatoire parmi les caractères spéciaux
-            self::$special[random_int(0, strlen(self::$special) - 1)]
-        ];
+      //Initialisation d'une chaine de caractères vide
+        $allCharacters = '';
+
+        
+        if (in_array('upper', $selectedCharacters)) {   // Vérification de la présence d'un type dans le tableau $selectedCharacters
+            $allCharacters .= self::$upper;         //Si 'true' on concatène le contenu de $upper dans la chaine de caractères $allCharacters
+        }
+        if (in_array('lower', $selectedCharacters)) {   //Idem
+            $allCharacters .= self::$lower;
+        }
+        if (in_array('numbers', $selectedCharacters)) {
+            $allCharacters .= self::$numbers;
+        }
+        if (in_array('special', $selectedCharacters)) {
+            $allCharacters .= self::$special;
+        }
+
+       
+
+        // Gestion de l'erreur : aucun caractère coché
+        if (empty($allCharacters)) {
+            
+            throw new \InvalidArgumentException("Au moins un type de caractère doit être sélectionné.");
+        }
+
 
         // Complète le mot de passe avec des caractères aléatoires jusqu'à atteindre la longueur souhaitée
-        for ($i = 4; $i < $length; $i++) {
+        for ($i = 0; $i < $length; $i++) {
             // Prend un caractère aléatoire parmi tous les caractères disponibles
             $password[] = $allCharacters[random_int(0, strlen($allCharacters) - 1)];
         }
@@ -48,16 +62,24 @@ class PasswordGenerator
         // Mélange l'ordre des caractères dans le mot de passe pour plus de sécurité
         shuffle($password);
 
+
+        
+
+        
         // Convertit le tableau en une chaîne de caractères et retourne le mot de passe généré
         return implode('', $password);
-    }
 
+        
+    }
+    
     /**
      * Vérifie si un mot de passe est considéré comme "fort".
      *
      * @param string $password Le mot de passe à vérifier.
      * @return bool true si le mot de passe est fort, sinon false.
      */
+
+     /////////////////////////////////////////////////////////INCHANGEE///////////////////////////////////////////////////////////////////////
     public static function isStrongPassword(string $password):bool
     {
         // Vérifie que la longueur du mot de passe est d'au moins 8 caractères
