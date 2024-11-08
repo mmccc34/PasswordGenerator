@@ -37,4 +37,20 @@ h1 {
   margin: 20px;
 }
 
+.verifBlock {
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+}
+
+.verif {
+  font-size: 1.5rem;
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  border: 2px solid black;
+  width: 600px;
+  background-color: beige;
+}
+
 /*# sourceMappingURL=main.css.map */

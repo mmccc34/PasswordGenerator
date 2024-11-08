@@ -50,41 +50,44 @@ use Chris\PasswordGenerator\PasswordGenerator;
         </div>
     </div>
 
-   <div class='resultBlock'>
-    <div class='result'>
-        <?php
-        try {
-            if (isset($_POST['length'])) {
+    <div class='resultBlock'>
+        <div class='result'>
+            <?php
+            try {
+                if (isset($_POST['length'])) {
 
-                $length = (int) $_POST['length'];
-                $selectedCharacters = isset($_POST['characters']) ? $_POST['characters'] : [];
+                    $length = (int) $_POST['length'];
+                    $selectedCharacters = isset($_POST['characters']) ? $_POST['characters'] : [];
 
-                $password = PasswordGenerator::generatePassword($length, $selectedCharacters);
+                    $password = PasswordGenerator::generatePassword($length, $selectedCharacters);
 
                     echo 'Le mot de passe généré est : ' . htmlspecialchars($password) . '<br>';
                 }
+            } catch (\Exception $e) {
+                echo $e->getMessage();
             }
-         catch (\Exception $e) {
-            echo $e->getMessage();
-        }
 
+            ?>
+        </div>
+    </div>
+    <div class='verifBlock'>
+    <div class ='verif'>
+        <?php
+
+        if (isset($_POST['password'])) {
+            $generatePassword = $_POST['password'];
+
+            try {
+                $isStrong = PasswordGenerator::isStrongPassword($generatePassword);
+                echo "Le mot de passe est-il fort ? " . ($isStrong ? "Oui" : "Non") . '<br>';
+            } catch (\Exception $e) {
+                echo $e->getMessage();
+            }
+        }
         ?>
+
     </div>
     </div>
-
-    <?php
-
-    if (isset($_POST['password'])) {
-        $generatePassword = $_POST['password'];
-
-        try {
-            $isStrong = PasswordGenerator::isStrongPassword($generatePassword);
-            echo "Le mot de passe est-il fort ? " . ($isStrong ? "Oui" : "Non") . '<br>';
-        } catch (\Exception $e) {
-            echo $e->getMessage();
-        }
-    }
-    ?>
 </body>
 
 </html>
